@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Update Expense</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">💼 Expense Tracker</div>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Add Expense</a>
+      <a href="#">Expense History</a>
+      <a href="#">User</a>
+    </nav>
+  </header>
+
+  <main class="form-container">
+    <h1>Update Expense</h1>
+    <form class="expense-form">
+      <label for="date">Date</label>
+      <input type="date" id="date" value="2024-04-21" required>
+
+      <label for="category">Category</label>
+      <select id="category" required>
+        <option value="food">Food</option>
+        <option value="travel">Travel</option>
+        <option value="shopping">Shopping</option>
+      </select>
+
+      <label for="amount">Amount</label>
+      <input type="number" id="amount" value="5.00" required>
+
+      <label for="description">Description</label>
+      <input type="text" id="description" value="Coffee" required>
+
+      <div class="btn-group">
+        <button type="submit" class="btn-primary">Update Expense</button>
+        <button type="button" class="btn-secondary">Cancel</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

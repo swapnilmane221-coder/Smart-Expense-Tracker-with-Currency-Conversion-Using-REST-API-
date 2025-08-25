@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">💼 EXPENSE</div>
+    <div class="nav-links">
+      <a href="#">Login</a>
+      <a href="#" class="active">Register</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <form class="register-form">
+      <h2>Register</h2>
+
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="John Doe" required />
+
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="john_doe" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="example@email.com" required />
+
+      <label for="password">Password</label>
+      <div class="password-row">
+        <input type="password" id="password" placeholder="Password" required />
+        <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+      </div>
+
+      <button type="submit" class="btn">Register</button>
+    </form>
+  </div>
+</body>
+</html>

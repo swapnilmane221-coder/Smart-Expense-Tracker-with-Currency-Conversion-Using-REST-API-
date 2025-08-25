@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <span class="logo">💼</span>
+      <span class="brand">EXPENSE</span>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="active">Dashboard</a>
+      <a href="#">Add Expense</a>
+      <div class="avatar">👤</div>
+    </div>
+  </nav>
+
+  <main class="dashboard">
+    <section class="dashboard-header">
+      <h1>Dashboard</h1>
+    </section>
+
+    <!-- Top Row: Cards + Currency -->
+    <section class="top-row">
+      <div class="cards">
+        <div class="card">
+          <h2>₹25,000</h2>
+          <p>Total Expenses</p>
+        </div>
+        <div class="card">
+          <h2>18</h2>
+          <p>Transactions</p>
+        </div>
+        <div class="card">
+          <h2>Food</h2>
+          <p>Highest Category</p>
+        </div>
+      </div>
+
+      <div class="currency-box">
+        <h3>Currency Converter</h3>
+        <div class="currency-controls">
+          <select>
+            <option>USD</option>
+            <option>EUR</option>
+            <option>GBP</option>
+          </select>
+          <input type="number" value="1" />
+          <span>INR</span>
+        </div>
+        <div class="currency-rate">82.77</div>
+      </div>
+    </section>
+
+    <!-- Charts -->
+    <section class="charts">
+      <div class="chart">
+        <h3>Expenses by Category</h3>
+        <canvas id="categoryChart"></canvas>
+      </div>
+      <div class="chart">
+        <h3>Monthly Spending</h3>
+        <canvas id="monthlyChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Doughnut Chart
+    new Chart(document.getElementById("categoryChart"), {
+      type: "doughnut",
+      data: {
+        labels: ["Food", "Travel", "Other", "Shopping"],
+        datasets: [{
+          data: [40, 20, 15, 25],
+          backgroundColor: ["#2563eb", "#22c55e", "#facc15", "#ef4444"],
+          borderWidth: 0
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { position: "bottom" } } }
+    });
+
+    // Bar Chart
+    new Chart(document.getElementById("monthlyChart"), {
+      type: "bar",
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Aug"],
+        datasets: [{
+          label: "Spending",
+          data: [8000, 10000, 13000, 14000],
+          backgroundColor: "#2563eb",
+          borderRadius: 5
+        }]
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
+  </script>
+</body>
+</html>
