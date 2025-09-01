@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expense List / History</title>
   <link rel="stylesheet" href="{% static 'css/add-expense.css' %}">
+
 </head>
 <body>
 
@@ -15,15 +17,15 @@
       <span>EXPENSE</span>
     </div>
     <nav class="nav-links">
-      <a href="#">Dashboard</a>
-      <a href="#">Add Expense</a>
-      <div class="profile-icon">👤</div>
-    </nav>
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="#" class="active">Add Expense</a>
+ <a href="{% url 'profile-setting' %}"><div class="avatar">👤</div></a>
+       </nav>
   </header>
 
   <!-- Main Content -->
   <main class="container">
-    <h2>Expense List / History</h2>
+    <h2>add Expense</h2>
 
     <form class="expense-form">
       <div class="row">

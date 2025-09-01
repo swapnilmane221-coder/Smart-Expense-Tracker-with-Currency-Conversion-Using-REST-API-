@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
 
       <div class="links">
         <a href="#">Forgot password?</a>
-        <p>Don't have an account? <a href="#">Register</a></p>
+        <p>Don't have an account? <a href="{% url 'user-register' %}">Register</a></p>
       </div>
     </div>
   </div>

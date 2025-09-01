@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +16,12 @@
       <span class="brand">EXPENSE</span>
     </div>
     <div class="nav-right">
+      <a href="{% url 'expense-history' %}">Expense History</a>
+      
       <a href="#" class="active">Dashboard</a>
-      <a href="#">Add Expense</a>
-      <div class="avatar">👤</div>
+      <a href="{% url 'add-expense' %}">Add Expense</a>
+      
+      <a href="{% url 'profile-setting' %}"><div class="avatar">👤</div></a>
     </div>
   </nav>
 

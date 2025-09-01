@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +14,10 @@
   <header class="header">
     <div class="logo">Expense Tracker</div>
     <nav class="nav-links">
-      <a href="#">Dashboard</a>
-      <a href="#">Add Expense</a>
-      <a href="#">Expense History</a>
-      <div class="user-dropdown">User ▼</div>
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'add-expense' %}">Add Expense</a>
+      <a href="{% url 'expense-history' %}">Expense History</a>
+      <a href="{% url 'profile-setting' %}"><div class="avatar">👤</div></a>
     </nav>
   </header>
 
@@ -35,46 +37,22 @@
         </tr>
       </thead>
       <tbody>
+        {% for expense in expenses %}
         <tr>
-          <td>2024-04-21</td>
-          <td>Coffee</td>
-          <td>$5.00</td>
-          <td>Food</td>
+          <td>{{ expense.date }}</td>
+          <td>{{ expense.title }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.category }}</td>
           <td>
-            <button class="btn edit">Edit</button>
+            <button class="btn edit" onclick="window.location.href='{% url 'update-expense' expense.id %}'">Edit</button>
             <button class="btn delete">Delete</button>
           </td>
         </tr>
+        {% empty %}
         <tr>
-          <td>2024-04-20</td>
-          <td>Bus Ticket</td>
-          <td>$2.50</td>
-          <td>Travel</td>
-          <td>
-            <button class="btn edit">Edit</button>
-            <button class="btn delete">Delete</button>
-          </td>
+          <td colspan="5">No expenses found.</td>
         </tr>
-        <tr>
-          <td>2024-04-18</td>
-          <td>Groceries</td>
-          <td>$45.00</td>
-          <td>Shopping</td>
-          <td>
-            <button class="btn edit">Edit</button>
-            <button class="btn delete">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>2024-04-15</td>
-          <td>Dinner</td>
-          <td>$30.00</td>
-          <td>Food</td>
-          <td>
-            <button class="btn edit">Edit</button>
-            <button class="btn delete">Delete</button>
-          </td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </main>
