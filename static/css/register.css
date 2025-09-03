@@ -125,3 +125,12 @@ body {
     flex-direction: column;
   }
 }
+ 
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: -5px;
+      margin-bottom: 10px;
+      display: none;
+    }
+  

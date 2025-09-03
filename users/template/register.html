@@ -7,6 +7,8 @@
   <title>Register</title>
   <link rel="stylesheet" href="{% static 'css/register.css' %}" />
 </head>
+
+
 <body>
   <nav class="navbar">
     <div class="logo">💼 EXPENSE</div>
@@ -17,25 +19,32 @@
   </nav>
 
   <div class="container">
-    <form class="register-form">
+    {% if messages %}
+      {% for message in messages %}
+        <h2 style="color: #b22222;">{{message}}</h2>
+      {% endfor %}
+    {% endif %}
+    <form class="register-form" method="post">
+      {% csrf_token %}
       <h2>Register</h2>
 
       <label for="name">Full Name</label>
-      <input type="text" id="name" placeholder="John Doe" required />
+      <input type="text" id="name" name="name" placeholder="John Doe" required />
 
-      <label for="username">Username</label>
-      <input type="text" id="username" placeholder="john_doe" required />
+      <label for="username" >Username</label>
+      <input type="text" name="username" id="username" placeholder="john_doe" required />
 
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="example@email.com" required />
+      <label for="email" >Email</label>
+      <input type="email" name="email" id="email" placeholder="example@email.com" required />
 
       <label for="password">Password</label>
       <div class="password-row">
-        <input type="password" id="password" placeholder="Password" required />
-        <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+        <input type="password" name="password" id="password" placeholder="Password" required />
+        <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required />
       </div>
 
-      <button type="submit" class="btn">Register</button>
+      
+        <button type="submit" class="btn">Register</button>
     </form>
   </div>
 </body>

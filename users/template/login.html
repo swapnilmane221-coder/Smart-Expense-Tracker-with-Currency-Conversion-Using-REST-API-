@@ -13,11 +13,16 @@
       <div class="logo">
         💼 <span>EXPENSE</span>
       </div>
+      {% if messages %}
+      {% for message in messages %}
+        <h2 style="color: #b22222;">{{message}}</h2>
+      {% endfor %}
+    {% endif %}
       <h2>Log in</h2>
 
-      <form class="login-form">
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
+      <form class="login-form" method="post">
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
 
         <button type="submit" class="btn">Log in</button>
       </form>

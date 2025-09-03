@@ -34,15 +34,15 @@
     <section class="top-row">
       <div class="cards">
         <div class="card">
-          <h2>₹25,000</h2>
+          <h2>₹{{total_amount}}</h2>
           <p>Total Expenses</p>
         </div>
         <div class="card">
-          <h2>18</h2>
+          <h2>{{transaction_count}}</h2>
           <p>Transactions</p>
         </div>
         <div class="card">
-          <h2>Food</h2>
+          <h2>{{ high_cat.category }}</h2>
           <p>Highest Category</p>
         </div>
       </div>
@@ -75,35 +75,43 @@
     </section>
   </main>
 
-  <script>
-    // Doughnut Chart
-    new Chart(document.getElementById("categoryChart"), {
-      type: "doughnut",
-      data: {
-        labels: ["Food", "Travel", "Other", "Shopping"],
-        datasets: [{
-          data: [40, 20, 15, 25],
-          backgroundColor: ["#2563eb", "#22c55e", "#facc15", "#ef4444"],
-          borderWidth: 0
-        }]
-      },
-      options: { responsive: true, plugins: { legend: { position: "bottom" } } }
-    });
 
-    // Bar Chart
-    new Chart(document.getElementById("monthlyChart"), {
-      type: "bar",
-      data: {
-        labels: ["Jan", "Feb", "Mar", "Aug"],
-        datasets: [{
-          label: "Spending",
-          data: [8000, 10000, 13000, 14000],
-          backgroundColor: "#2563eb",
-          borderRadius: 5
-        }]
-      },
-      options: { responsive: true, scales: { y: { beginAtZero: true } } }
-    });
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const categories = JSON.parse('{{ categories|escapejs }}');
+  const amounts = JSON.parse('{{ amounts|escapejs }}');
+  const months = JSON.parse('{{ months|escapejs }}');
+  const monthlyAmounts = JSON.parse('{{ monthly_amounts|escapejs }}');
+
+  // Doughnut Chart
+  new Chart(document.getElementById("categoryChart"), {
+    type: "doughnut",
+    data: {
+      labels: categories,
+      datasets: [{
+        data: amounts,
+        backgroundColor: ["#2563eb", "#22c55e", "#facc15", "#ef4444"],
+        borderWidth: 0
+      }]
+    },
+    options: { responsive: true, plugins: { legend: { position: "bottom" } } }
+  });
+
+  // Bar Chart
+  new Chart(document.getElementById("monthlyChart"), {
+    type: "bar",
+    data: {
+      labels: months,
+      datasets: [{
+        label: "Spending",
+        data: monthlyAmounts,
+        backgroundColor: "#2563eb",
+        borderRadius: 5
+      }]
+    },
+    options: { responsive: true, scales: { y: { beginAtZero: true } } }
+  });
+</script>
+
 </body>
 </html>
