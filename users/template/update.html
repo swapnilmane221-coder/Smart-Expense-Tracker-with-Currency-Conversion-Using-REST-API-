@@ -8,38 +8,58 @@
   <link rel="stylesheet" href="{% static 'css/update.css' %}">
 </head>
 <body>
+  <!-- Navbar -->
   <header class="navbar">
     <div class="logo">💼 Expense Tracker</div>
     <nav>
-      <a href="#">Dashboard</a>
-      <a href="#">Add Expense</a>
-      <a href="#">Expense History</a>
-      <a href="#">User</a>
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'add-expense' %}">Add Expense</a>
+      <a href="{% url 'expense-history' %}">Expense History</a>
+      <a href="{% url 'profile-setting' %}">👤</a>
     </nav>
   </header>
 
+  <!-- Main Form -->
   <main class="form-container">
     <h1>Update Expense</h1>
-    <form class="expense-form">
-      <label for="date">Date</label>
-      <input type="date" id="date" value="2024-04-21" required>
+    <form class="expense-form" method="post">
+      {% csrf_token %}
+      
+      <!-- Title -->
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" value="{{ e.title }}" required>
 
+      <!-- Date -->
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" value="{{ e.date|date:'Y-m-d' }}" required>
+
+      <!-- Category -->
       <label for="category">Category</label>
-      <select id="category" required>
-        <option value="food">Food</option>
-        <option value="travel">Travel</option>
-        <option value="shopping">Shopping</option>
+      <select id="category" name="category" required>
+        <option value="Personal & Household" {% if e.category == "Personal & Household" %}selected{% endif %}>Personal & Household</option>
+        <option value="Transportation" {% if e.category == "Transportation" %}selected{% endif %}>Transportation</option>
+        <option value="Food & Dining" {% if e.category == "Food & Dining" %}selected{% endif %}>Food & Dining</option>
+        <option value="Shopping" {% if e.category == "Shopping" %}selected{% endif %}>Shopping</option>
+        <option value="Health & Wellness" {% if e.category == "Health & Wellness" %}selected{% endif %}>Health & Wellness</option>
+        <option value="Education" {% if e.category == "Education" %}selected{% endif %}>Education</option>
+        <option value="Entertainment & Leisure" {% if e.category == "Entertainment & Leisure" %}selected{% endif %}>Entertainment & Leisure</option>
+        <option value="Travel" {% if e.category == "Travel" %}selected{% endif %}>Travel</option>
+        <option value="Financial Obligations" {% if e.category == "Financial Obligations" %}selected{% endif %}>Financial Obligations</option>
+        <option value="Miscellaneous" {% if e.category == "Miscellaneous" %}selected{% endif %}>Miscellaneous</option>
       </select>
 
+      <!-- Amount -->
       <label for="amount">Amount</label>
-      <input type="number" id="amount" value="5.00" required>
+      <input type="number" id="amount" name="amount" value="{{ e.amount }}" required>
 
+      <!-- Description -->
       <label for="description">Description</label>
-      <input type="text" id="description" value="Coffee" required>
+      <input type="text" id="description" name="description" value="{{ e.description }}" required>
 
+      <!-- Buttons -->
       <div class="btn-group">
         <button type="submit" class="btn-primary">Update Expense</button>
-        <button type="button" class="btn-secondary">Cancel</button>
+        <button type="button" class="btn-secondary" onclick="window.location.href='{% url 'expense-history' %}'">Cancel</button>
       </div>
     </form>
   </main>

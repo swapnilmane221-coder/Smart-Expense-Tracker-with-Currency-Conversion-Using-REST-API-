@@ -44,8 +44,8 @@
           <td>{{ expense.amount }}</td>
           <td>{{ expense.category }}</td>
           <td>
-            <button class="btn edit" onclick="window.location.href='{% url 'update-expense' expense.id %}'">Edit</button>
-            <button class="btn delete">Delete</button>
+            <button class="btn edit" onclick="window.location.href='{% url 'update' expense.id %}'">Edit</button>
+            <button class="btn delete" onclick="window.location.href='{% url 'delete-expense' expense.id %}'">Delete</button>
           </td>
         </tr>
         {% empty %}

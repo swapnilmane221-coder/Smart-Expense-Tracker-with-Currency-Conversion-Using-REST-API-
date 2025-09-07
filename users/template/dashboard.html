@@ -47,19 +47,159 @@
         </div>
       </div>
 
-      <div class="currency-box">
-        <h3>Currency Converter</h3>
-        <div class="currency-controls">
-          <select>
-            <option>USD</option>
-            <option>EUR</option>
-            <option>GBP</option>
-          </select>
-          <input type="number" value="1" />
-          <span>INR</span>
-        </div>
-        <div class="currency-rate">82.77</div>
-      </div>
+      <style>
+.currency-box {
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.currency-box h3 {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #2563eb;
+}
+
+.currency-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.currency-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.currency-row label {
+  font-size: 14px;
+  min-width: 45px;
+}
+
+.currency-row select,
+.currency-row input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.currency-row input {
+  max-width: 120px;
+}
+
+.currency-result {
+  flex: 1.5;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
+  color: #2563eb;
+}
+#currency-select,
+#currency-select_convert {
+  width: 100px;
+}
+</style>
+
+<div class="currency-box">
+  <h3>💱 Currency Converter</h3>
+  
+  <div class="currency-controls">
+    <!-- From + Amount in one row -->
+    <div class="currency-row">
+      <label>From</label>
+      <select id="currency-select">
+        <option value="USD">$ USD – US Dollar</option>
+<option value="EUR">€ EUR – Euro</option>
+<option value="INR">₹ INR – Indian Rupee</option>
+<option value="GBP">£ GBP – British Pound</option>
+<option value="JPY">¥ JPY – Japanese Yen</option>
+<option value="AUD">$ AUD – Australian Dollar</option>
+<option value="CAD">$ CAD – Canadian Dollar</option>
+<option value="CHF">CHF – Swiss Franc</option>
+<option value="CNY">¥ CNY – Chinese Yuan</option>
+<option value="BRL">R$ BRL – Brazilian Real</option>
+<option value="RUB">₽ RUB – Russian Ruble</option>
+<option value="ZAR">R ZAR – South African Rand</option>
+<option value="KRW">₩ KRW – South Korean Won</option>
+<option value="SGD">$ SGD – Singapore Dollar</option>
+<option value="HKD">$ HKD – Hong Kong Dollar</option>
+<option value="MXN">$ MXN – Mexican Peso</option>
+<option value="NZD">$ NZD – New Zealand Dollar</option>
+<option value="SEK">kr SEK – Swedish Krona</option>
+<option value="NOK">kr NOK – Norwegian Krone</option>
+<option value="DKK">kr DKK – Danish Krone</option>
+<option value="PLN">zł PLN – Polish Zloty</option>
+<option value="TRY">₺ TRY – Turkish Lira</option>
+<option value="THB">฿ THB – Thai Baht</option>
+<option value="IDR">Rp IDR – Indonesian Rupiah</option>
+<option value="MYR">RM MYR – Malaysian Ringgit</option>
+<option value="PHP">₱ PHP – Philippine Peso</option>
+<option value="VND">₫ VND – Vietnamese Dong</option>
+<option value="AED">د.إ AED – UAE Dirham</option>
+<option value="SAR">﷼ SAR – Saudi Riyal</option>
+<option value="EGP">£ EGP – Egyptian Pound</option>
+<option value="NGN">₦ NGN – Nigerian Naira</option>
+<option value="PKR">₨ PKR – Pakistani Rupee</option>
+<option value="BDT">৳ BDT – Bangladeshi Taka</option>
+<option value="ILS">₪ ILS – Israeli Shekel</option>
+
+      </select>
+      <input type="number" id="amount-input" value="1" min="1" />
+    </div>
+    
+    <!-- To + Converted Result in one row -->
+    <div class="currency-row">
+      <label>To</label>
+      <select id="currency-select_convert">
+       <option value="USD">$ USD – US Dollar</option>
+<option value="EUR">€ EUR – Euro</option>
+<option value="INR">₹ INR – Indian Rupee</option>
+<option value="GBP">£ GBP – British Pound</option>
+<option value="JPY">¥ JPY – Japanese Yen</option>
+<option value="AUD">$ AUD – Australian Dollar</option>
+<option value="CAD">$ CAD – Canadian Dollar</option>
+<option value="CHF">CHF – Swiss Franc</option>
+<option value="CNY">¥ CNY – Chinese Yuan</option>
+<option value="BRL">R$ BRL – Brazilian Real</option>
+<option value="RUB">₽ RUB – Russian Ruble</option>
+<option value="ZAR">R ZAR – South African Rand</option>
+<option value="KRW">₩ KRW – South Korean Won</option>
+<option value="SGD">$ SGD – Singapore Dollar</option>
+<option value="HKD">$ HKD – Hong Kong Dollar</option>
+<option value="MXN">$ MXN – Mexican Peso</option>
+<option value="NZD">$ NZD – New Zealand Dollar</option>
+<option value="SEK">kr SEK – Swedish Krona</option>
+<option value="NOK">kr NOK – Norwegian Krone</option>
+<option value="DKK">kr DKK – Danish Krone</option>
+<option value="PLN">zł PLN – Polish Zloty</option>
+<option value="TRY">₺ TRY – Turkish Lira</option>
+<option value="THB">฿ THB – Thai Baht</option>
+<option value="IDR">Rp IDR – Indonesian Rupiah</option>
+<option value="MYR">RM MYR – Malaysian Ringgit</option>
+<option value="PHP">₱ PHP – Philippine Peso</option>
+<option value="VND">₫ VND – Vietnamese Dong</option>
+<option value="AED">د.إ AED – UAE Dirham</option>
+<option value="SAR">﷼ SAR – Saudi Riyal</option>
+<option value="EGP">£ EGP – Egyptian Pound</option>
+<option value="NGN">₦ NGN – Nigerian Naira</option>
+<option value="PKR">₨ PKR – Pakistani Rupee</option>
+<option value="BDT">৳ BDT – Bangladeshi Taka</option>
+<option value="ILS">₪ ILS – Israeli Shekel</option>
+
+      </select>
+      <div class="currency-result" id="currency-result">--</div>
+    </div>
+  </div>
+</div>
+
+
     </section>
 
     <!-- Charts -->
@@ -113,5 +253,39 @@
   });
 </script>
 
+<script>
+async function fetchRate() {
+  const currency = document.getElementById("currency-select").value;
+  const currency_convert = document.getElementById("currency-select_convert").value;
+  const amount = document.getElementById("amount-input").value;
+
+  if (!amount || amount <= 0) {
+    document.getElementById("currency-result").innerText = "Enter valid amount";
+    return;
+  }
+
+  try {
+    // Call Django API
+    const response = await fetch(`/api/convert/?amount=${amount}&from=${currency}&to=${currency_convert}`);
+    const data = await response.json();
+
+    if (data.converted_amount) {
+      document.getElementById("currency-result").innerText =
+        ` ${data.converted_amount} ${currency_convert}`;
+    } else {
+      document.getElementById("currency-result").innerText = "Conversion error";
+    }
+  } catch (error) {
+    document.getElementById("currency-result").innerText = "API error";
+  }
+}
+
+// Event listeners
+document.getElementById("currency-select").addEventListener("change", fetchRate);
+document.getElementById("amount-input").addEventListener("input", fetchRate);
+
+// Load initial conversion
+fetchRate();
+</script>
 </body>
 </html>

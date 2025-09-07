@@ -8,8 +8,8 @@ from users.models import expense
 from django.db.models import Sum
 import json
 from django.db.models.functions import TruncMonth
-
-
+from django.shortcuts import get_object_or_404, redirect
+import requests
 
 
 # Create your views here.
@@ -81,11 +81,16 @@ def add_expense(request):
           category=request.POST.get('category')
           description=request.POST.get('description')
           date=request.POST.get('date')
-          print(title)
-          print(amount)
-          print(category)
-          print(description)
-          print(date)
+          currency=request.POST.get('currency')
+          response = requests.get("http://127.0.0.1:8000/api/convert/", params={
+        "amount": 100,
+        "from": currency,
+        "to": "INR"
+    })
+          
+          data=response.json()
+          amount=int(data['converted_amount'])
+          print(data)
           Expense=expense(title=title,amount=amount,category=category,description=description,date=date)
           Expense.save()
           return redirect('dashboard')
@@ -103,6 +108,25 @@ def profile_setting(request):
      return render(request, 'profile-setting.html')
 
 @login_required(login_url='user-login')
-def update(request):
-     expense={id:1}
-     return render(request, 'update.html',{'expense':expense})
+def update(request,id):
+     Expense=get_object_or_404(expense,pk=id)
+     if request.method=='POST':
+          title=request.POST.get('title')
+          amount=int(request.POST.get('amount'))
+          category=request.POST.get('category')
+          description=request.POST.get('description')
+          date=request.POST.get('date')
+          Expense.title=title
+          Expense.amount=amount
+          Expense.category=category
+          Expense.description=description
+          Expense.date=date
+          Expense.save()
+          return redirect('expense-history')
+     return render(request, 'update.html',{'e':Expense})
+
+@login_required
+def delete(request, id):
+    Expense = get_object_or_404(expense, pk=id)
+    Expense.delete()
+    return redirect("expense-history")
